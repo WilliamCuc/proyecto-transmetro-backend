@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     MYSQL_HOST: str
     MYSQL_PORT: int
     MYSQL_DB: str
+    VIEW_URL: str
 
     @property
     def DATABASE_URL(self):

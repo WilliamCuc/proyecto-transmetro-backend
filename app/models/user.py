@@ -12,6 +12,7 @@ class User:
         return dict(result._mapping) if result else None
 
     def create_user(self, nombre: str, apellido: str, correo: str, contrasena: str, rol: str, estado: bool):
+        
         query = text("""
             INSERT INTO usuarios (nombre, apellido, correo, contrasena, rol, estado)
             VALUES (:nombre, :apellido, :correo, :contrasena, :rol, :estado)
@@ -37,3 +38,14 @@ class User:
         query = text("UPDATE usuarios SET estado = 0 WHERE id_usuario = :id")
         self.db.execute(query, {"id": user_id})
         self.db.commit()
+
+    def get_all_users(self):
+        query = text("SELECT * FROM usuarios WHERE estado = 1")
+        result = self.db.execute(query).fetchall()
+        return [dict(row._mapping) for row in result]
+    
+    def login(self, correo: str, contrasena: str):
+
+        query = text("SELECT * FROM usuarios WHERE correo = :correo AND contrasena = :contrasena")
+        result = self.db.execute(query, {"correo": correo, "contrasena": contrasena}).fetchone()
+        return dict(result._mapping) if result else None

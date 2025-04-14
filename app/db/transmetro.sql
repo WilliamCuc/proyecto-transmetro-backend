@@ -9,7 +9,7 @@ CREATE TABLE usuarios (
   apellido VARCHAR(100),
   correo VARCHAR(100),
   contrasena VARCHAR(255),
-  rol ENUM('admin', 'operador', 'pasajero'),
+  rol INT,
   estado BOOLEAN
 );
 

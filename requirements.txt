@@ -4,3 +4,4 @@ pymysql
 python-dotenv
 uvicorn
 pydantic_settings
+bcrypt
