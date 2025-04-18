@@ -13,14 +13,57 @@ def get_user_by_id(user_id: int):
     return user
 
 @router.post("/api/user/create")
-def create_user(nombre: str, apellido: str, correo: str, contrasena: str, rol: str, estado: bool):
-    user_model.create_user(nombre, apellido, correo, contrasena, rol, estado)
-    return {"message": "User created successfully"}
+def create_user(
+    nombre: str,
+    apellido: str,
+    correo: str,
+    contrasena: str,
+    rol: str,
+    estado: str
+):
+    try:
+        user_model = User()
+        user_model.create_user(
+            nombre,
+            apellido,
+            correo,
+            contrasena,
+            rol,
+            int(estado)
+        )
+        return {"message": "Usuario creado exitosamente"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.put("/api/user/update")
-def update_user(user_id: int, user_data: dict):
-    user_model.update_user(user_id, **user_data)
-    return {"message": "User updated successfully"}
+def update_user(
+    user_id: int,
+    nombre: str = None,
+    apellido: str = None,
+    correo: str = None,
+    rol: str = None,
+    estado: str = None
+):
+    try:
+        update_data = {}
+        if nombre is not None:
+            update_data['nombre'] = nombre
+        if apellido is not None:
+            update_data['apellido'] = apellido
+        if correo is not None:
+            update_data['correo'] = correo
+        if rol is not None:
+            update_data['rol'] = int(rol)
+        if estado is not None:
+            update_data['estado'] = int(estado)
+        
+        user_model = User()
+        user_model.update_user(user_id, **update_data)
+        return {"message": "Usuario actualizado exitosamente"}
+    except Exception as e:
+        print(f"Error updating user: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 @router.delete("/api/user/delete")
 def delete_user(user_id: int):
@@ -28,9 +71,15 @@ def delete_user(user_id: int):
     return {"message": "User deleted successfully"}
 
 @router.get("/api/user/get-all")
-def get_all_users():
-    users = user_model.get_all()
-    return users
+async def get_all_users():
+    try:
+        user_model = User()
+        users = user_model.get_all_users()
+        return users
+    except Exception as e:
+        # Agregar logging para debug
+        print(f"Error: {str(e)}")  # Esto te ayudará a ver el error en los logs
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/api/user/login")
 async def login(request: Request):

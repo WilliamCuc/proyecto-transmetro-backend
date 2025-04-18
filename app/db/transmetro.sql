@@ -10,7 +10,7 @@ CREATE TABLE usuarios (
   correo VARCHAR(100),
   contrasena VARCHAR(255),
   rol INT,
-  estado BOOLEAN
+  estado INT
 );
 
 -- Tabla roles
@@ -102,7 +102,8 @@ CREATE TABLE pilotos (
 CREATE TABLE lineas (
   id_linea INT PRIMARY KEY AUTO_INCREMENT,
   nombre VARCHAR(100),
-  distancia_total DECIMAL(10,2)
+  distancia_total DECIMAL(10,2),
+  estado INT
 );
 
 -- Tabla estaciones_lineas
