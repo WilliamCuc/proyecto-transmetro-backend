@@ -76,7 +76,8 @@ CREATE TABLE guardias (
 -- Tabla parqueos
 CREATE TABLE parqueos (
   id_parqueo INT PRIMARY KEY AUTO_INCREMENT,
-  id_estacion INT
+  id_estacion INT,
+  codigo VARCHAR(25),
 );
 
 -- Tabla buses
