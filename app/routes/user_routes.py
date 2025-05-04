@@ -77,8 +77,7 @@ async def get_all_users():
         users = user_model.get_all_users()
         return users
     except Exception as e:
-        # Agregar logging para debug
-        print(f"Error: {str(e)}")  # Esto te ayudará a ver el error en los logs
+        print(f"Error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/api/user/login")
