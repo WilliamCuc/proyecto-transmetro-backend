@@ -12,6 +12,8 @@ from app.routes.troute_routes import router as troute_router
 from app.routes.bus_routes import router as bus_router
 from app.routes.pilot_routes import router as pilot_router
 from app.routes.schedule_routes import router as schedule_router
+from app.routes.guard_routes import router as guard_router
+from app.routes.access_routes import router as access_router
 from app.config import settings
 
 app = FastAPI()
@@ -28,6 +30,8 @@ app.include_router(troute_router)
 app.include_router(bus_router)
 app.include_router(pilot_router)
 app.include_router(schedule_router)
+app.include_router(guard_router)
+app.include_router(access_router)
 
 if __name__ == "__main__":
     import uvicorn
