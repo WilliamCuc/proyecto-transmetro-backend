@@ -16,16 +16,17 @@ class Bus:
         result = self.db.execute(query, {"bus_id": bus_id}).fetchone()
         return dict(result._mapping) if result else None
 
-    def create_bus(self, numero_bus: str, capacidad: int, estado: str, id_parqueo: int):
+    def create_bus(self, numero_bus: str, capacidad: int, estado: str, id_parqueo: int, id_ruta: int):
         query = text("""
-            INSERT INTO buses (numero_bus, capacidad, estado, id_parqueo)
-            VALUES (:numero_bus, :capacidad, :estado, :id_parqueo)
+            INSERT INTO buses (numero_bus, capacidad, estado, id_parqueo, id_ruta)
+            VALUES (:numero_bus, :capacidad, :estado, :id_parqueo, :id_ruta)
         """)
         self.db.execute(query, {
             "numero_bus": numero_bus,
             "capacidad": capacidad,
             "estado": estado,
-            "id_parqueo": id_parqueo
+            "id_parqueo": id_parqueo,
+            "id_ruta": id_ruta
         })
         self.db.commit()
 

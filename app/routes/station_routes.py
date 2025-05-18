@@ -13,8 +13,8 @@ def get_station(station_id: int):
     return station_model.get_by_id(station_id)
 
 @router.post("/api/station/create")
-def create_station(nombre: str, ubicacion: str, id_municipio: int):
-    station_model.create_station(nombre, ubicacion, id_municipio)
+def create_station(nombre: str, ubicacion: str, id_municipio: int, id_linea: int):
+    station_model.create_station(nombre, ubicacion, id_municipio, id_linea)
     return {"message": "Estación creada exitosamente"}
 
 @router.put("/api/station/update")
@@ -22,7 +22,8 @@ def update_station(
     station_id: int,
     nombre: str = None,
     ubicacion: str = None,
-    id_municipio: int = None
+    id_municipio: int = None,
+    id_linea: int = None
 ):
     try:
         update_data = {}
@@ -32,6 +33,8 @@ def update_station(
             update_data['ubicacion'] = ubicacion
         if id_municipio is not None:
             update_data['id_municipio'] = int(id_municipio)
+        if id_linea is not None:
+            update_data['id_linea'] = int(id_linea)
         
         station_model.update_station(station_id, **update_data)
         return {"message": "Estación actualizada exitosamente"}

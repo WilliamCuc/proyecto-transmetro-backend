@@ -10,15 +10,16 @@ class Station:
         result = self.db.execute(query, {"id": station_id}).fetchone()
         return dict(result._mapping) if result else None
 
-    def create_station(self, nombre: str, ubicacion: str, id_municipio: int):
+    def create_station(self, nombre: str, ubicacion: str, id_municipio: int, id_linea: int):
         query = text("""
-            INSERT INTO estaciones (nombre, ubicacion, id_municipio)
-            VALUES (:nombre, :ubicacion, :id_municipio)
+            INSERT INTO estaciones (nombre, ubicacion, id_municipio, id_linea)
+            VALUES (:nombre, :ubicacion, :id_municipio, :id_linea)
         """)
         self.db.execute(query, {
             "nombre": nombre,
             "ubicacion": ubicacion,
-            "id_municipio": id_municipio
+            "id_municipio": id_municipio,
+            "id_linea": id_linea
         })
         self.db.commit()
 

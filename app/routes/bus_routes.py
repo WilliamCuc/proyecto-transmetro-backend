@@ -22,9 +22,9 @@ def get_bus(bus_id: int):
         raise HTTPException(status_code=500, detail=f"Error al obtener el bus: {str(e)}")
 
 @router.post("/api/bus/create")
-def create_bus(numero_bus: str, capacidad: int, estado: str, id_parqueo: int):
+def create_bus(numero_bus: str, capacidad: int, estado: str, id_parqueo: int, id_ruta: int):
     try:
-        bus_model.create_bus(numero_bus, capacidad, estado, id_parqueo)
+        bus_model.create_bus(numero_bus, capacidad, estado, id_parqueo, id_ruta)
         return {"message": "Bus creado exitosamente"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error al crear el bus: {str(e)}")
@@ -35,7 +35,8 @@ def update_bus(
     numero_bus: str = None,
     capacidad: int = None,
     estado: str = None,
-    id_parqueo: int = None
+    id_parqueo: int = None,
+    id_ruta: int = None
 ):
     try:
         update_data = {}
@@ -47,6 +48,8 @@ def update_bus(
             update_data['estado'] = estado
         if id_parqueo is not None:
             update_data['id_parqueo'] = id_parqueo
+        if id_ruta is not None:
+            update_data['id_ruta'] = id_ruta
         
         bus_model.update_bus(bus_id, **update_data)
         return {"message": "Bus actualizado exitosamente"}
