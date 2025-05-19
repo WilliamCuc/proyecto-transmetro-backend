@@ -56,7 +56,8 @@ CREATE TABLE estaciones (
   id_estacion INT PRIMARY KEY AUTO_INCREMENT,
   nombre VARCHAR(100),
   ubicacion TEXT,
-  id_municipio INT
+  id_municipio INT,
+  id_linea INT
 );
 
 -- Tabla accesos
@@ -86,7 +87,8 @@ CREATE TABLE buses (
   numero_bus VARCHAR(10),
   capacidad INT,
   estado ENUM('activo', 'mantenimiento', 'fuera de servicio'),
-  id_parqueo INT
+  id_parqueo INT,
+  id_ruta INT
 );
 
 -- Tabla pilotos

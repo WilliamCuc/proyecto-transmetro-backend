@@ -15,6 +15,8 @@ from app.routes.schedule_routes import router as schedule_router
 from app.routes.guard_routes import router as guard_router
 from app.routes.access_routes import router as access_router
 from app.routes.stop_routes import router as stop_router
+from app.routes.ticket_routes import router as ticket_router
+from app.routes.report_routes import router as report_router
 from app.config import settings
 
 app = FastAPI()
@@ -34,6 +36,8 @@ app.include_router(schedule_router)
 app.include_router(guard_router)
 app.include_router(access_router)
 app.include_router(stop_router)
+app.include_router(ticket_router)
+app.include_router(report_router)
 
 if __name__ == "__main__":
     import uvicorn
