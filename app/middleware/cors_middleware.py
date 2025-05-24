@@ -6,7 +6,7 @@ def add_cors_middleware(app):
         allow_origins=[
             "http://localhost:5173",
             "http://localhost:3000",
-            "https://proyecto-transmetro-frontend.vercel.app/",
+            "https://proyecto-transmetro-frontend.vercel.app",
         ],
         allow_credentials=True,
         allow_methods=["*"],

@@ -1,7 +1,6 @@
 import os
 from fastapi import FastAPI
 from app.middleware.cors_middleware import add_cors_middleware
-from fastapi.middleware.cors import CORSMiddleware
 from app.routes.user_routes import router as user_router
 from app.routes.line_routes import router as line_router
 from app.routes.municipality_routes import router as municipality_router
